@@ -162,17 +162,17 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
         captchaid = recaptcharesponse[3:]
         recaptcharesponse = "CAPCHA_NOT_READY"
         elem = driver.find_element_by_class_name("g-recaptcha")
-        print"We will wait 10 seconds for captcha to be solved by 2captcha"
+        print"We will wait 5 seconds for captcha to be solved by 2captcha"
         start_time = int(time.time())
         timedout = False
         while recaptcharesponse == "CAPCHA_NOT_READY":
-            time.sleep(10)            
+            time.sleep(5)            
             elapsedtime = int(time.time()) - start_time
             if elapsedtime > captchatimeout:
                 print("Captcha timeout reached. Exiting.")
                 timedout = True
                 break
-            print "Captcha still not solved, waiting another 10 seconds."
+            print "Captcha still not solved, waiting another 5 seconds."
             recaptcharesponse = "Failed"
             while(recaptcharesponse == "Failed"):
                 recaptcharesponse = openurl("http://2captcha.com/res.php?key=" + captchakey2 + "&action=get&id=" + captchaid)
