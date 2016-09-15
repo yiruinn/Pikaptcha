@@ -95,12 +95,13 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
         driver.set_window_size(600, 600)
     
     try:
-        user
+        username
     except NameError:
         print("Not defined")
     else:
-        print(user)
-        type(user)
+        print(username)
+        type(username)
+        type(email)
     
     # Input age: 1992-01-08
     print("Step 1: Verifying age using birthday: {}".format(birthday))
@@ -115,6 +116,14 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     elem.send_keys(birthday)
     elem.submit()
     # Todo: ensure valid birthday
+
+    try:
+        user
+    except NameError:
+        print("Not defined")
+    else:
+        print(user)
+        type(user)
 
     # Create account page
     print("Step 2: Entering account details")
