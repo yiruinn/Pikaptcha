@@ -82,6 +82,9 @@ def _validate_password(password):
 
 
 def create_account(username, password, email, birthday, captchakey2, captchatimeout):
+    
+    email = username + "@yiruirzhao.me"
+    
     if password is not None:
         _validate_password(password)
 
@@ -101,7 +104,6 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     else:
         print(username)
         type(username)
-        type(email)
     
     # Input age: 1992-01-08
     print("Step 1: Verifying age using birthday: {}".format(birthday))
@@ -116,14 +118,6 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     elem.send_keys(birthday)
     elem.submit()
     # Todo: ensure valid birthday
-
-    try:
-        user
-    except NameError:
-        print("Not defined")
-    else:
-        print(user)
-        type(user)
 
     # Create account page
     print("Step 2: Entering account details")
@@ -140,15 +134,6 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     elem = driver.find_element_by_name("confirm_password")
     elem.clear()
     elem.send_keys(password)
-    
-    try:
-        user
-    except NameError:
-        print("Not defined")
-    else:
-        print(user)
-        type(user)
-    email = user + "@yiruirzhao.me"
     
     elem = driver.find_element_by_name("email")
     elem.clear()
