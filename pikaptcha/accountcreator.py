@@ -94,8 +94,6 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
         driver = webdriver.Chrome()
         driver.set_window_size(600, 600)
     
-    email = user+"@yiruirzhao.me"
-    
     # Input age: 1992-01-08
     print("Step 1: Verifying age using birthday: {}".format(birthday))
     driver.get("{}/sign-up/".format(BASE_URL))
@@ -126,6 +124,9 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     elem.clear()
     elem.send_keys(password)
 
+    email = user+"@yiruirzhao.me"
+    print(email)
+    
     elem = driver.find_element_by_name("email")
     elem.clear()
     elem.send_keys(email)
