@@ -174,13 +174,13 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
         start_time = int(time.time())
         timedout = False
         while recaptcharesponse == "CAPCHA_NOT_READY":
-            time.sleep(3)            
+            time.sleep(10)            
             elapsedtime = int(time.time()) - start_time
             if elapsedtime > captchatimeout:
                 print("Captcha timeout reached. Exiting.")
                 timedout = True
                 break
-            print "Captcha still not solved, waiting another 3 seconds."
+            print "Captcha still not solved, waiting another 10 seconds."
             recaptcharesponse = "Failed"
             while(recaptcharesponse == "Failed"):
                 recaptcharesponse = openurl("http://2captcha.com/res.php?key=" + captchakey2 + "&action=get&id=" + captchaid)
