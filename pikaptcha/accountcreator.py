@@ -85,7 +85,7 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     if password is not None:
         _validate_password(password)
 
-    print("Attempting to create user {user}:{pw}. Opening browser...".format(user=username, pw=password))
+    print("Attempting to create user {user}:{pw} using email: {em}. Opening browser...".format(user=username, pw=password, em=email))
     if captchakey2 != None:
         dcap = dict(DesiredCapabilities.PHANTOMJS)
         dcap["phantomjs.page.settings.userAgent"] = user_agent
@@ -93,7 +93,9 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     else:
         driver = webdriver.Chrome()
         driver.set_window_size(600, 600)
-
+    
+    email = user+"@yiruirzhao.me"
+    
     # Input age: 1992-01-08
     print("Step 1: Verifying age using birthday: {}".format(birthday))
     driver.get("{}/sign-up/".format(BASE_URL))
@@ -159,11 +161,11 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
         captchaid = recaptcharesponse[3:]
         recaptcharesponse = "CAPCHA_NOT_READY"
         elem = driver.find_element_by_class_name("g-recaptcha")
-        print"We will wait 10 seconds for captcha to be solved by 2captcha"
+        print"We will wait 3 seconds for captcha to be solved by 2captcha"
         start_time = int(time.time())
         timedout = False
         while recaptcharesponse == "CAPCHA_NOT_READY":
-            time.sleep(10)            
+            time.sleep(3)            
             elapsedtime = int(time.time()) - start_time
             if elapsedtime > captchatimeout:
                 print("Captcha timeout reached. Exiting.")
