@@ -119,6 +119,7 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     user.clear()
     user.send_keys(username)
     
+    time.sleep(1)
     
     driver.find_element_by_id("check-availability-username").click()
     text = driver.find_element_by_class_name("alert").text
@@ -130,8 +131,6 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
             print("Failed to create user: {}".format(username))
             driver.close()
             raise
-    
-    time.sleep(5)
 
     elem = driver.find_element_by_name("password")
     elem.clear()
