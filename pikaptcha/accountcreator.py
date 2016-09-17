@@ -122,8 +122,9 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     time.sleep(5)
     
     driver.find_element_by_id("check-availability-username").click()
-    time.sleep(4)
+    time.sleep(5)
     text = driver.find_element_by_class_name("alert").text
+    print(text)
     if text == "This username is available.":
         try:
             _validate_response(driver)
