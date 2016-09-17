@@ -122,11 +122,17 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     time.sleep(5)
     
     driver.find_element_by_id("check-availability-username").click()
-    time.sleep(60)
+    time.sleep(4)
     text = driver.find_element_by_class_name("alert").text
-    print(text)
+    if text == "This username is available.":
+        try:
+            _validate_response(driver)
+        except:
+            print("Failed to create user: {}".format(username))
+            driver.close()
+            raise
     
-    time.sleep(10)
+    time.sleep(5)
 
     elem = driver.find_element_by_name("password")
     elem.clear()
