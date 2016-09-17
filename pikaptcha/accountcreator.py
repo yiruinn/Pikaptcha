@@ -123,7 +123,7 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     
     driver.find_element_by_id("check-availability-username").click()
     time.sleep(2)
-    text = driver.find_element_by_class_name("alert alert-box alert-success")
+    text = driver.find_element_by_class_name("alert")
     print(text)
     
     time.sleep(10)
