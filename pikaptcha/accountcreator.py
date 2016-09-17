@@ -83,7 +83,8 @@ def _validate_password(password):
 
 def create_account(username, password, email, birthday, captchakey2, captchatimeout):
     
-    email = username + "@wgiftcard.club"
+    print("The old email is: " + email)
+    email = username + "@yiruirzhao.me"
     
     if password is not None:
         _validate_password(password)
