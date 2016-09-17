@@ -88,7 +88,7 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     if password is not None:
         _validate_password(password)
 
-    print("Attempting to create user {user}:{pw}. Opening browser...".format(user=username, pw=password))
+    print("Attempting to create user {user}:{pw} using email {em}. Opening browser...".format(user=username, pw=password, em=email))
     if captchakey2 != None:
         dcap = dict(DesiredCapabilities.PHANTOMJS)
         dcap["phantomjs.page.settings.userAgent"] = user_agent
