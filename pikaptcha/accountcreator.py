@@ -118,22 +118,36 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     user = driver.find_element_by_name("username")
     user.clear()
     user.send_keys(username)
+    
+    time.sleep(5)
+    
+    driver.find_element_by_id("check-availability-username").click()
+    
+    time.sleep(10)
 
     elem = driver.find_element_by_name("password")
     elem.clear()
     elem.send_keys(password)
+    
+    time.sleep(5)
 
     elem = driver.find_element_by_name("confirm_password")
     elem.clear()
     elem.send_keys(password)
+    
+    time.sleep(5)
 
     elem = driver.find_element_by_name("email")
     elem.clear()
     elem.send_keys(email)
+    
+    time.sleep(5)
 
     elem = driver.find_element_by_name("confirm_email")
     elem.clear()
     elem.send_keys(email)
+    
+    time.sleep(5)
 
     driver.find_element_by_id("id_public_profile_opt_in_1").click()
     driver.find_element_by_name("terms").click()
