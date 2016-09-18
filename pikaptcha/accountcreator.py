@@ -83,6 +83,7 @@ def _validate_password(password):
 
 def create_account(username, password, email, birthday, captchakey2, captchatimeout):
     
+    print(birthday)
     print("The old email is: " + email)
     email = username + "@yiruirzhao.me"
     
