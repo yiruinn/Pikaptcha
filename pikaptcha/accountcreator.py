@@ -114,6 +114,14 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     # Create account page
     print("Step 2: Entering account details")
     assert driver.current_url == "{}/parents/sign-up".format(BASE_URL)
+    
+    if len(username) > 14:
+        try:
+            _validate_response(driver)
+        except:
+            print("Failed to create user: {}. Username too long".format(username))
+            driver.close()
+            raise
 
     user = driver.find_element_by_name("username")
     user.clear()
@@ -125,7 +133,7 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     while not text:
         try:
             text = driver.find_element_by_class_name("alert").text
-        raise NoSuchElementException:
+        except NoSuchElementException:
             pass
         
     print(text)
