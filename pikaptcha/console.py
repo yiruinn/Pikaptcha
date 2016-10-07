@@ -107,7 +107,7 @@ def _verify_plusmail_format(settings):
 def _verify_twocaptcha_balance(settings):
     if (settings['args'].recaptcha != None and settings['balance'] == 'ERROR_KEY_DOES_NOT_EXIST'):
         raise PTCTwocaptchaException("2captcha key does not exist.")
-    if (settings['args'].recaptcha != None and float(settings['balance']) < float(settings['args'].count)*0.003):
+    if (settings['args'].recaptcha != None and float(settings['balance']) < float(settings['args'].count)*0):
         raise PTCTwocaptchaException("It does not seem like you have enough balance for this run. Lower the count or increase your balance.")
 
 def _verify_settings(settings):
