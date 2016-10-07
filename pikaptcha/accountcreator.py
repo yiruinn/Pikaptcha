@@ -129,6 +129,8 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     
     driver.find_element_by_id("check-availability-username").click()
     
+    print("Checking username availability")
+    
     text = None
     while not text:
         try:
