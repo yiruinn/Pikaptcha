@@ -174,8 +174,8 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
         html_source = driver.page_source
         gkey_index = html_source.find("https://www.google.com/recaptcha/api2/anchor?k=") + 47
         gkey = html_source[gkey_index:gkey_index+40]
-        print("gkey_index: " + gkey_index)
-        print("gkey: " + gkey)
+        print("gkey_index: " + str(gkey_index))
+        print("gkey: " + str(gkey))
         
         elem = driver.find_element_by_class_name("g-recaptcha")
         driver.execute_script("arguments[0].scrollIntoView(true);", elem)
