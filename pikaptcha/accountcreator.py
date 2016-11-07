@@ -96,7 +96,16 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     else:
         driver = webdriver.Chrome()
         driver.set_window_size(600, 600)
-
+        
+    #checking length of username    
+    if len(username) > 14:
+        try:
+            _validate_response(driver)
+        except:
+            print("Failed to create user: {}. Username too long".format(username))
+            driver.close()
+            raise
+            
     # Input age: 1992-01-08
     print("Step 1: Verifying age using birthday: {}".format(birthday))
     driver.get("{}/sign-up/".format(BASE_URL))
@@ -114,14 +123,6 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     # Create account page
     print("Step 2: Entering account details")
     assert driver.current_url == "{}/parents/sign-up".format(BASE_URL)
-    
-    if len(username) > 14:
-        try:
-            _validate_response(driver)
-        except:
-            print("Failed to create user: {}. Username too long".format(username))
-            driver.close()
-            raise
 
     user = driver.find_element_by_name("username")
     user.clear()
@@ -169,6 +170,13 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     if captchakey2 == None:
         #Do manual captcha entry
         print("You did not pass a 2captcha key. Please solve the captcha manually.")
+        
+        html_source = driver.page_source
+        gkey_index = html_source.find("https://www.google.com/recaptcha/api2/anchor?k=") + 47
+        gkey = html_source[gkey_index:gkey_index+40]
+        print("gkey_index: " + gkey_index)
+        print("gkey: " + gkey)
+        
         elem = driver.find_element_by_class_name("g-recaptcha")
         driver.execute_script("arguments[0].scrollIntoView(true);", elem)
         # Waits 1 minute for you to input captcha
