@@ -81,7 +81,7 @@ def _validate_password(password):
     return True
 
 
-def create_account(username, password, email, birthday, captchakey2, captchatimeout):
+def create_account(username, password, email, birthday, captchakey2, captchatimeout, proxy):
     
     email = username + email
     
@@ -94,8 +94,16 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
         dcap["phantomjs.page.settings.userAgent"] = user_agent
         driver = webdriver.PhantomJS(desired_capabilities=dcap)
     else:
-        driver = webdriver.Chrome()
-        driver.set_window_size(600, 600)
+        if proxy is not None:
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_argument('--proxy-server=%s' % proxy)
+            driver = webdriver.Chrome(chrome_options=chrome_options)
+            print("Using proxy for selenium: " + proxy)
+            driver.set_window_size(600, 600)
+        else:
+            driver = webdriver.Chrome()
+            print("Not using proxy for selenium")
+            driver.set_window_size(600, 600)
         
     #checking length of username    
     if len(username) > 14:
@@ -245,7 +253,7 @@ def _validate_response(driver):
         raise PTCException("Generic failure. User was not created.")
 
 
-def random_account(username=None, password=None, email=None, birthday=None, plusmail=None, recaptcha=None, captchatimeout=1000):
+def random_account(username=None, password=None, email=None, birthday=None, plusmail=None, recaptcha=None, captchatimeout=1000, proxy=None):
     try_username = _random_string() if username is None else str(username)
     password = _random_string() if password is None else str(password)
     try_email = _random_email() if email is None else str(email)
@@ -261,7 +269,7 @@ def random_account(username=None, password=None, email=None, birthday=None, plus
     account_created = False
     while not account_created:
         try:
-            account_created = create_account(try_username, password, try_email, try_birthday, captchakey2, captchatimeout)
+            account_created = create_account(try_username, password, try_email, try_birthday, captchakey2, captchatimeout, proxy)
         except PTCInvalidNameException:
             if username is None:
                 try_username = _random_string()
