@@ -90,9 +90,18 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
 
     print("Attempting to create user {user}:{pw} using email {em}. Opening browser...".format(user=username, pw=password, em=email))
     if captchakey2 != None:
-        dcap = dict(DesiredCapabilities.PHANTOMJS)
-        dcap["phantomjs.page.settings.userAgent"] = user_agent
-        driver = webdriver.PhantomJS(desired_capabilities=dcap)
+        if proxy is not None:
+            service_args = [
+            '--proxy='+proxy,
+            '--proxy-type=https',
+            ]
+            dcap = dict(DesiredCapabilities.PHANTOMJS)
+            dcap["phantomjs.page.settings.userAgent"] = user_agent
+            driver = webdriver.PhantomJS(desired_capabilities=dcap,service_args=service_args)
+        else:
+            dcap = dict(DesiredCapabilities.PHANTOMJS)
+            dcap["phantomjs.page.settings.userAgent"] = user_agent
+            driver = webdriver.PhantomJS(desired_capabilities=dcap)
     else:
         if proxy is not None:
             chrome_options = webdriver.ChromeOptions()
