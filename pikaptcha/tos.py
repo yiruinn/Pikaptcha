@@ -29,17 +29,18 @@ def accept_tos_helper(username, password, location, proxy):
     location = location.split(",")
     api.set_position(float(location[0]), float(location[1]), 0.0)
     api.set_authentication(provider = 'ptc', username = username, password = password)
-    response = api.app_simulation_login()
-    if response == None:
-        print "Servers do not respond to login attempt. " + failMessage
-        return
-
+    response = None
+    while response == None:
+        response = api.app_simulation_login()
+        time.sleep(1)
+        #print "Servers do not respond to login attempt. " + failMessage
+        
     time.sleep(1)
     req = api.create_request()
     req.mark_tutorial_complete(tutorials_completed = 0, send_marketing_emails = False, send_push_notifications = False)
-    response = req.call()
-    if response == None:
-        print "Servers do not respond to accepting the ToS. " + failMessage
-        return
+    response = None
+    while reponse == None:
+        response = req.call()
+        time.sleep(1)
 
     print('Accepted Terms of Service for {}'.format(username))
