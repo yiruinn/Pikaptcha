@@ -39,7 +39,7 @@ def accept_tos_helper(username, password, location, proxy):
     req = api.create_request()
     req.mark_tutorial_complete(tutorials_completed = 0, send_marketing_emails = False, send_push_notifications = False)
     response = None
-    while reponse == None:
+    while response == None:
         response = req.call()
         time.sleep(1)
 
