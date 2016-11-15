@@ -163,7 +163,7 @@ def entry():
                     print('  Email   :  {}'.format(account_info["email"]))
                     
                     # Accept Terms Service
-                    #accept_tos(account_info["username"], account_info["password"], args.location, args.proxy)
+                    accept_tos(account_info["username"], account_info["password"], args.location, args.proxy)
         
                     # Verify email
                     if (args.autoverify == True):
