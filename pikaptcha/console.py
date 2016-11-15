@@ -7,7 +7,7 @@ from pikaptcha.tos import *
 from pikaptcha.gmailv import *
 from pikaptcha.url import *
 
-#from pgoapi.exceptions import AuthException, ServerSideRequestThrottlingException, NotLoggedInException
+from pgoapi.exceptions import AuthException, ServerSideRequestThrottlingException, NotLoggedInException
 import pprint
 import threading
 import getopt
@@ -163,7 +163,7 @@ def entry():
                     print('  Email   :  {}'.format(account_info["email"]))
                     
                     # Accept Terms Service
-                    #accept_tos(account_info["username"], account_info["password"], args.location, args.proxy)
+                    accept_tos(account_info["username"], account_info["password"], args.location, args.proxy)
         
                     # Verify email
                     if (args.autoverify == True):
