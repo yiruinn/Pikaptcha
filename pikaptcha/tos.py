@@ -1,9 +1,9 @@
 import time
 import string
-#from pgoapi import PGoApi
-#from pgoapi.utilities import f2i
-#from pgoapi import utilities as util
-#from pgoapi.exceptions import AuthException, ServerSideRequestThrottlingException, NotLoggedInException
+from pgoapi import PGoApi
+from pgoapi.utilities import f2i
+from pgoapi import utilities as util
+from pgoapi.exceptions import AuthException, ServerSideRequestThrottlingException, NotLoggedInException
 
 def accept_tos(username, password, location, proxy):
     try:
