@@ -132,7 +132,8 @@ def entry():
         print("Your 2captcha balance is: " + captchabal)
         print("This run will cost you approximately: " + str(float(args.count)*0.003))
 
-    username = args.username    
+    username = args.username
+    proxies = [proxyline.rstrip('\n') for proxyline in open('args.proxy')]
     
     if args.inputtext != None:
         print("Reading accounts from: " + args.inputtext)
@@ -154,9 +155,10 @@ def entry():
             if (args.inputtext != None):
                 username = ((lines[x]).split(":"))[0]
                 args.password = ((lines[x]).split(":"))[1]
+                proxy = proxies[x % len(proxies)]
             try:
                 try:
-                    account_info = pikaptcha.random_account(username, args.password, args.email, args.birthday, args.plusmail, args.recaptcha, args.captchatimeout, args.proxy)
+                    account_info = pikaptcha.random_account(username, args.password, args.email, args.birthday, args.plusmail, args.recaptcha, args.captchatimeout, proxy)
                     
                     print('  Username:  {}'.format(account_info["username"]))
                     print('  Password:  {}'.format(account_info["password"]))
