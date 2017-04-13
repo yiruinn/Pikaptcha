@@ -133,7 +133,7 @@ def entry():
         print("This run will cost you approximately: " + str(float(args.count)*0.003))
 
     username = args.username
-    proxies = [proxyline.rstrip('\n') for proxyline in open('args.proxy')]
+    proxies = [proxyline.rstrip('\n') for proxyline in open(args.proxy)]
     
     if args.inputtext != None:
         print("Reading accounts from: " + args.inputtext)
