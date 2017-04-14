@@ -135,6 +135,8 @@ def entry():
     username = args.username
     if args.proxy != None:
         proxies = [proxyline.rstrip('\n') for proxyline in open(args.proxy)]
+    else
+        proxies = None
     
     if args.inputtext != None:
         print("Reading accounts from: " + args.inputtext)
@@ -156,8 +158,10 @@ def entry():
             if (args.inputtext != None):
                 username = ((lines[x]).split(":"))[0]
                 args.password = ((lines[x]).split(":"))[1]
-                if args.proxy != None:
+                if proxies != None:
                     proxy = proxies[x % len(proxies)]
+                else:
+                    proxy = None
             try:
                 try:
                     account_info = pikaptcha.random_account(username, args.password, args.email, args.birthday, args.plusmail, args.recaptcha, args.captchatimeout, proxy)
