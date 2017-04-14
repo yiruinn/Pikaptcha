@@ -149,7 +149,11 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     user.clear()
     user.send_keys(username)
 
-    driver.find_element_by_id("check-availability-username").send_key(Keys.RETURN)#click()
+    button = driver.find_element_by_id("check-availability-username")
+    IJavaScriptExecutor js = _driver as IJavaScriptExecutor;
+    js.ExecuteScript("arguments[0].click();", buttonToClick)
+    
+    #driver.find_element_by_id("check-availability-username").click()
     
     print("Checking username availability")
     
