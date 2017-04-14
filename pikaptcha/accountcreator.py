@@ -99,13 +99,13 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
             dcap["phantomjs.page.settings.userAgent"] = user_agent
             driver = webdriver.PhantomJS(desired_capabilities=dcap,service_args=service_args)
             print("Using proxy for phantomjs: " + proxy)
-            driver.set_window_size(1200, 800)
+            driver.set_window_size(600, 600)
         else:
             dcap = dict(DesiredCapabilities.PHANTOMJS)
             dcap["phantomjs.page.settings.userAgent"] = user_agent
             driver = webdriver.PhantomJS(desired_capabilities=dcap)
             print("Not using proxy for phantomjs")
-            driver.set_window_size(1200, 800)
+            driver.set_window_size(600, 600)
     else:
         if proxy is not None:
             chrome_options = webdriver.ChromeOptions()
