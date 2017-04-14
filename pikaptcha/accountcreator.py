@@ -132,9 +132,10 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
         try:
             _validate_response(driver)
         except:
-            print("Failed to create user: {}".format(username))
+            print("Limit for proxy reached")
             driver.close()
             raise
+    print("Account can be created.")
 
     # Create account page
     print("Step 2: Entering account details")
