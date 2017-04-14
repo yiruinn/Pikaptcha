@@ -135,7 +135,7 @@ def entry():
     username = args.username
     if args.proxy != None:
         proxies = [proxyline.rstrip('\n') for proxyline in open(args.proxy)]
-    else
+    else:
         proxies = None
     
     if args.inputtext != None:
