@@ -177,8 +177,6 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     elem = driver.find_element_by_name("email")
     elem.clear()
     elem.send_keys(email)
-    elem.submit()
-    
 
     elem = driver.find_element_by_name("confirm_email")
     elem.clear()
