@@ -122,6 +122,19 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     elem.send_keys(birthday)
     elem.submit()
     # Todo: ensure valid birthday
+    
+    assert driver.current_url == "{}/parents/sign-up".format(BASE_URL)
+    
+    print("Step 1.5: Checking if limit is reached")
+    elem = driver.find_element_by_class_name("button-green")
+    elem.submit()
+    if driver.current_url != "{}/parents/sign-up".format(BASE_URL):
+        try:
+            _validate_response(driver)
+        except:
+            print("Failed to create user: {}".format(username))
+            driver.close()
+            raise
 
     # Create account page
     print("Step 2: Entering account details")
@@ -132,6 +145,7 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     user.send_keys(username)
     
     driver.find_element_by_id("check-availability-username").click()
+    
     
     print("Checking username availability")
     
@@ -161,7 +175,9 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
 
     elem = driver.find_element_by_name("email")
     elem.clear()
-    elem.send_keys(email)
+    elem.send_keys(email)("button-green")
+    elem.submit()
+    
 
     elem = driver.find_element_by_name("confirm_email")
     elem.clear()
