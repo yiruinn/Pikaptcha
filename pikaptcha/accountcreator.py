@@ -89,34 +89,16 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
         _validate_password(password)
 
     print("Attempting to create user {user}:{pw} using email {em}. Opening browser...".format(user=username, pw=password, em=email))
-    if captchakey2 != None:
-        if proxy is not None:
-            service_args = [
-            '--proxy='+proxy,
-            '--proxy-type=https',
-            ]
-            dcap = dict(DesiredCapabilities.PHANTOMJS)
-            dcap["phantomjs.page.settings.userAgent"] = user_agent
-            driver = webdriver.PhantomJS(desired_capabilities=dcap,service_args=service_args)
-            print("Using proxy for phantomjs: " + proxy)
-            driver.set_window_size(600, 600)
-        else:
-            dcap = dict(DesiredCapabilities.PHANTOMJS)
-            dcap["phantomjs.page.settings.userAgent"] = user_agent
-            driver = webdriver.PhantomJS(desired_capabilities=dcap)
-            print("Not using proxy for phantomjs")
-            driver.set_window_size(600, 600)
+    if proxy is not None:
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--proxy-server=%s' % proxy)
+        driver = webdriver.Chrome(chrome_options=chrome_options)
+        print("Using proxy for selenium: " + proxy)
+        driver.set_window_size(600, 600)
     else:
-        if proxy is not None:
-            chrome_options = webdriver.ChromeOptions()
-            chrome_options.add_argument('--proxy-server=%s' % proxy)
-            driver = webdriver.Chrome(chrome_options=chrome_options)
-            print("Using proxy for selenium: " + proxy)
-            driver.set_window_size(600, 600)
-        else:
-            driver = webdriver.Chrome()
-            print("Not using proxy for selenium")
-            driver.set_window_size(600, 600)
+        driver = webdriver.Chrome()
+        print("Not using proxy for selenium")
+        driver.set_window_size(600, 600)
         
     #checking length of username    
     if len(username) > 14:
