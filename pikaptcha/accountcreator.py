@@ -149,9 +149,16 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     user.clear()
     user.send_keys(username)
     
+    
+    try:
+        driver.find_element_by_id("check-availability-username")
+    except NoSuchElementException:
+        print("not found")
+    print("found")
+
     #driver.find_element_by_id("check-availability-username").click()
-    IJavaScriptExecutor js = driver as IJavaScriptExecutor;
-    js.ExecuteScript("arguments[0].click();", find_element_by_id("check-availability-username"))
+    
+    time.sleep(20)
     
     print("Checking username availability")
     
