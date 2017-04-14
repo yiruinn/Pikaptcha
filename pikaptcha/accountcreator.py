@@ -148,17 +148,8 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     user = driver.find_element_by_name("username")
     user.clear()
     user.send_keys(username)
-    
-    
-    try:
-        driver.find_element_by_id("check-availability-username")
-    except NoSuchElementException:
-        print("not found")
-    print("found")
 
-    #driver.find_element_by_id("check-availability-username").click()
-    
-    time.sleep(20)
+    driver.find_element_by_id("check-availability-username").send_key(Keys.RETURN)#click()
     
     print("Checking username availability")
     
