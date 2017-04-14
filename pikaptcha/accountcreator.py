@@ -148,10 +148,8 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     user = driver.find_element_by_name("username")
     user.clear()
     user.send_keys(username)
-
-    driver.execute_script("document.getElementsById('check-availability-username').click()")
     
-    #driver.find_element_by_id("check-availability-username").click()
+    driver.find_element_by_id("check-availability-username").click().perform()
     
     print("Checking username availability")
     
