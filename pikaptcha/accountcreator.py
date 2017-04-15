@@ -225,6 +225,13 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
             recaptcharesponse = "Failed"
             while(recaptcharesponse == "Failed"):
                 recaptcharesponse = openurl("http://2captcha.com/res.php?key=" + captchakey2 + "&action=get&id=" + captchaid)
+        if recaptcharesponse == "ERROR_CAPTCHA_UNSOLVABLE":
+                try:
+                    _validate_response(driver)
+                except:
+                    print("2Captcha failed to solve. Unable to create user.")
+                    driver.close()
+                    raise
         if timedout == False:       
             solvedcaptcha = recaptcharesponse[3:]
             captchalen = len(solvedcaptcha)
