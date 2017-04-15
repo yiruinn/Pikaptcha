@@ -242,7 +242,7 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     except:
         print("Failed to create user: {}".format(username))
         print("Wait a minute...")
-        if raw_input("Something broke. Continue? y/n") == y:
+        if raw_input("Something broke. Continue? y/n") == "y":
             print("Continuing")
         driver.close()
         raise
