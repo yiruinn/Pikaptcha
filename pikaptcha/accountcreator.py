@@ -241,6 +241,7 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
         _validate_response(driver)
     except:
         print("Failed to create user: {}".format(username))
+        print("Wait a minute...")
         time.sleep(10000)
         driver.close()
         raise
