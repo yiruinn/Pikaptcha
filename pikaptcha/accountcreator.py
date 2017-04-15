@@ -230,8 +230,6 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
                     _validate_response(driver)
                 except:
                     print("2Captcha failed to solve. Unable to create user.")
-                    if raw_input("Continue? y/n") == "y":
-                        print("Continuing")
                     driver.close()
                     raise
         if timedout == False:       
