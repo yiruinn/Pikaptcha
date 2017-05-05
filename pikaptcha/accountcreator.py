@@ -123,7 +123,12 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     elem.submit()
     # Todo: ensure valid birthday
     
-    assert driver.current_url == "{}/parents/sign-up".format(BASE_URL)
+    try:
+        assert driver.current_url == "{}/parents/sign-up".format(BASE_URL)
+    except:
+            print("Proxy doesn't work")
+            driver.close()
+            raise
     
     print("Step 1.5: Checking if limit is reached")
     elem = driver.find_element_by_class_name("button-green")
