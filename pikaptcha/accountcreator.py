@@ -112,9 +112,14 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     # Input age: 1992-01-08
     print("Step 1: Verifying age using birthday: {}".format(birthday))
     driver.get("{}/sign-up/".format(BASE_URL))
-    assert driver.current_url == "{}/sign-up/".format(BASE_URL)
-    elem = driver.find_element_by_name("dob")
-
+    try:
+        assert driver.current_url == "{}/sign-up/".format(BASE_URL)
+        elem = driver.find_element_by_name("dob")
+    except:
+            print("Proxy's dead yo.")
+            driver.close()
+            raise
+            
     # Workaround for different region not having the same input type
     driver.execute_script("var input = document.createElement('input'); input.type='text'; input.setAttribute('name', 'dob'); arguments[0].parentNode.replaceChild(input, arguments[0])", elem)
 
@@ -123,12 +128,7 @@ def create_account(username, password, email, birthday, captchakey2, captchatime
     elem.submit()
     # Todo: ensure valid birthday
     
-    try:
-        assert driver.current_url == "{}/parents/sign-up".format(BASE_URL)
-    except:
-            print("Proxy doesn't work")
-            driver.close()
-            raise
+    assert driver.current_url == "{}/parents/sign-up".format(BASE_URL)
     
     print("Step 1.5: Checking if limit is reached")
     elem = driver.find_element_by_class_name("button-green")
